@@ -1,0 +1,33 @@
+# Render Blueprint - one web service that runs the whole AuraCry app (frontend + API + models).
+# In Render: New + -> Blueprint -> connect this repo. Render reads this file and creates the service.
+services:
+  - type: web
+    name: auracry
+    runtime: docker
+    plan: free                      # 512 MB RAM. Runs the ML model; the deep (torch) branch needs a bigger plan.
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true         # Render generates a strong secret for you
+      - key: COOKIE_SECURE
+        value: "1"                  # Render serves HTTPS, so secure cookies
+      - key: OTP_DEV_ECHO
+        value: "1"                  # no email provider -> the login code is shown on screen (clearly marked "dev mode").
+                                    # Set to "0" and add SMTP_* vars to email real codes instead.
+      - key: RATELIMIT_ENABLED
+        value: "1"
+      # Optional: auto-create an admin on first boot (otherwise just use the Register screen)
+      # - key: ADMIN_EMAIL
+      #   value: you@example.com
+      # - key: ADMIN_PASSWORD
+      #   sync: false               # set the value in the Render dashboard, not in git
+      # - key: ADMIN_PIN
+      #   value: "246813"
+      # Optional email (to send real OTP codes instead of dev mode):
+      # - key: SMTP_HOST
+      #   value: smtp.gmail.com
+      # - key: SMTP_USER
+      #   sync: false
+      # - key: SMTP_PASS
+      #   sync: false

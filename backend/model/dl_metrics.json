@@ -1,0 +1,414 @@
+{
+  "task": "cry_reason",
+  "classes": [
+    "Hungry",
+    "Tired",
+    "Discomfort",
+    "Belly Pain",
+    "Needs Burping"
+  ],
+  "arch": {
+    "num_classes": 5,
+    "n_mels": 128,
+    "proj_dim": 128,
+    "gru_hidden": 96,
+    "dropout": 0.4
+  },
+  "n_train": 1338,
+  "n_val": 220,
+  "n_test": 220,
+  "class_counts_train": {
+    "Hungry": 423,
+    "Tired": 467,
+    "Discomfort": 133,
+    "Belly Pain": 137,
+    "Needs Burping": 178
+  },
+  "best_val_macro_f1": 0.5506,
+  "val": {
+    "accuracy": 0.7182,
+    "balanced_accuracy": 0.5942,
+    "macro_f1": 0.5506,
+    "per_class": {
+      "Hungry": {
+        "precision": 0.7887323943661971,
+        "recall": 0.7777777777777778,
+        "f1-score": 0.7832167832167832,
+        "support": 72.0
+      },
+      "Tired": {
+        "precision": 0.9425287356321839,
+        "recall": 0.7735849056603774,
+        "f1-score": 0.8497409326424871,
+        "support": 106.0
+      },
+      "Discomfort": {
+        "precision": 0.23076923076923078,
+        "recall": 0.5454545454545454,
+        "f1-score": 0.32432432432432434,
+        "support": 11.0
+      },
+      "Belly Pain": {
+        "precision": 0.3333333333333333,
+        "recall": 0.2857142857142857,
+        "f1-score": 0.3076923076923077,
+        "support": 14.0
+      },
+      "Needs Burping": {
+        "precision": 0.4166666666666667,
+        "recall": 0.5882352941176471,
+        "f1-score": 0.4878048780487805,
+        "support": 17.0
+      },
+      "accuracy": 0.7181818181818181,
+      "macro avg": {
+        "precision": 0.5424060721535223,
+        "recall": 0.5941533617449266,
+        "f1-score": 0.5505558451849366,
+        "support": 220.0
+      },
+      "weighted avg": {
+        "precision": 0.7772056359538145,
+        "recall": 0.7181818181818181,
+        "f1-score": 0.7392367729718236,
+        "support": 220.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        56,
+        2,
+        7,
+        2,
+        5
+      ],
+      [
+        6,
+        82,
+        9,
+        5,
+        4
+      ],
+      [
+        2,
+        0,
+        6,
+        0,
+        3
+      ],
+      [
+        5,
+        0,
+        3,
+        4,
+        2
+      ],
+      [
+        2,
+        3,
+        1,
+        1,
+        10
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.75,
+    "balanced_accuracy": 0.627,
+    "macro_f1": 0.604,
+    "per_class": {
+      "Hungry": {
+        "precision": 0.803030303030303,
+        "recall": 0.7361111111111112,
+        "f1-score": 0.7681159420289855,
+        "support": 72.0
+      },
+      "Tired": {
+        "precision": 0.8910891089108911,
+        "recall": 0.8571428571428571,
+        "f1-score": 0.8737864077669902,
+        "support": 105.0
+      },
+      "Discomfort": {
+        "precision": 0.42857142857142855,
+        "recall": 0.5454545454545454,
+        "f1-score": 0.48,
+        "support": 11.0
+      },
+      "Belly Pain": {
+        "precision": 0.3888888888888889,
+        "recall": 0.4666666666666667,
+        "f1-score": 0.42424242424242425,
+        "support": 15.0
+      },
+      "Needs Burping": {
+        "precision": 0.42857142857142855,
+        "recall": 0.5294117647058824,
+        "f1-score": 0.47368421052631576,
+        "support": 17.0
+      },
+      "accuracy": 0.75,
+      "macro avg": {
+        "precision": 0.588030231594588,
+        "recall": 0.6269573890162126,
+        "f1-score": 0.6039657969129432,
+        "support": 220.0
+      },
+      "weighted avg": {
+        "precision": 0.7691630526689033,
+        "recall": 0.75,
+        "f1-score": 0.7579463117463849,
+        "support": 220.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        53,
+        5,
+        2,
+        8,
+        4
+      ],
+      [
+        5,
+        90,
+        2,
+        3,
+        5
+      ],
+      [
+        3,
+        1,
+        6,
+        0,
+        1
+      ],
+      [
+        2,
+        4,
+        0,
+        7,
+        2
+      ],
+      [
+        3,
+        1,
+        4,
+        0,
+        9
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.5498,
+      "val_macro_f1": 0.0705,
+      "val_acc": 0.0682
+    },
+    {
+      "epoch": 2,
+      "loss": 1.3792,
+      "val_macro_f1": 0.131,
+      "val_acc": 0.1091
+    },
+    {
+      "epoch": 3,
+      "loss": 1.272,
+      "val_macro_f1": 0.2806,
+      "val_acc": 0.3409
+    },
+    {
+      "epoch": 4,
+      "loss": 1.1884,
+      "val_macro_f1": 0.4061,
+      "val_acc": 0.4727
+    },
+    {
+      "epoch": 5,
+      "loss": 1.1482,
+      "val_macro_f1": 0.344,
+      "val_acc": 0.4091
+    },
+    {
+      "epoch": 6,
+      "loss": 1.0365,
+      "val_macro_f1": 0.4916,
+      "val_acc": 0.5864
+    },
+    {
+      "epoch": 7,
+      "loss": 1.0255,
+      "val_macro_f1": 0.4563,
+      "val_acc": 0.55
+    },
+    {
+      "epoch": 8,
+      "loss": 1.0071,
+      "val_macro_f1": 0.5007,
+      "val_acc": 0.6364
+    },
+    {
+      "epoch": 9,
+      "loss": 0.9879,
+      "val_macro_f1": 0.4424,
+      "val_acc": 0.5409
+    },
+    {
+      "epoch": 10,
+      "loss": 0.944,
+      "val_macro_f1": 0.4078,
+      "val_acc": 0.5182
+    },
+    {
+      "epoch": 11,
+      "loss": 0.9169,
+      "val_macro_f1": 0.4246,
+      "val_acc": 0.5364
+    },
+    {
+      "epoch": 12,
+      "loss": 0.9061,
+      "val_macro_f1": 0.4487,
+      "val_acc": 0.55
+    },
+    {
+      "epoch": 13,
+      "loss": 0.8858,
+      "val_macro_f1": 0.4727,
+      "val_acc": 0.5955
+    },
+    {
+      "epoch": 14,
+      "loss": 0.8708,
+      "val_macro_f1": 0.4569,
+      "val_acc": 0.6182
+    },
+    {
+      "epoch": 15,
+      "loss": 0.8066,
+      "val_macro_f1": 0.3899,
+      "val_acc": 0.5045
+    },
+    {
+      "epoch": 16,
+      "loss": 0.8211,
+      "val_macro_f1": 0.3936,
+      "val_acc": 0.4909
+    },
+    {
+      "epoch": 17,
+      "loss": 0.7771,
+      "val_macro_f1": 0.4851,
+      "val_acc": 0.6136
+    },
+    {
+      "epoch": 18,
+      "loss": 0.8111,
+      "val_macro_f1": 0.5231,
+      "val_acc": 0.6909
+    },
+    {
+      "epoch": 19,
+      "loss": 0.7682,
+      "val_macro_f1": 0.4754,
+      "val_acc": 0.6045
+    },
+    {
+      "epoch": 20,
+      "loss": 0.753,
+      "val_macro_f1": 0.4674,
+      "val_acc": 0.6045
+    },
+    {
+      "epoch": 21,
+      "loss": 0.7535,
+      "val_macro_f1": 0.4987,
+      "val_acc": 0.65
+    },
+    {
+      "epoch": 22,
+      "loss": 0.7054,
+      "val_macro_f1": 0.4948,
+      "val_acc": 0.6455
+    },
+    {
+      "epoch": 23,
+      "loss": 0.7407,
+      "val_macro_f1": 0.4897,
+      "val_acc": 0.6273
+    },
+    {
+      "epoch": 24,
+      "loss": 0.7546,
+      "val_macro_f1": 0.5051,
+      "val_acc": 0.6773
+    },
+    {
+      "epoch": 25,
+      "loss": 0.7344,
+      "val_macro_f1": 0.5506,
+      "val_acc": 0.7182
+    },
+    {
+      "epoch": 26,
+      "loss": 0.7495,
+      "val_macro_f1": 0.538,
+      "val_acc": 0.7136
+    },
+    {
+      "epoch": 27,
+      "loss": 0.7236,
+      "val_macro_f1": 0.5056,
+      "val_acc": 0.6318
+    },
+    {
+      "epoch": 28,
+      "loss": 0.6947,
+      "val_macro_f1": 0.49,
+      "val_acc": 0.6409
+    },
+    {
+      "epoch": 29,
+      "loss": 0.689,
+      "val_macro_f1": 0.474,
+      "val_acc": 0.6091
+    },
+    {
+      "epoch": 30,
+      "loss": 0.651,
+      "val_macro_f1": 0.4943,
+      "val_acc": 0.6409
+    },
+    {
+      "epoch": 31,
+      "loss": 0.6829,
+      "val_macro_f1": 0.5137,
+      "val_acc": 0.6727
+    },
+    {
+      "epoch": 32,
+      "loss": 0.7097,
+      "val_macro_f1": 0.5196,
+      "val_acc": 0.6727
+    },
+    {
+      "epoch": 33,
+      "loss": 0.6663,
+      "val_macro_f1": 0.4918,
+      "val_acc": 0.6455
+    },
+    {
+      "epoch": 34,
+      "loss": 0.6672,
+      "val_macro_f1": 0.5112,
+      "val_acc": 0.6727
+    },
+    {
+      "epoch": 35,
+      "loss": 0.6651,
+      "val_macro_f1": 0.5283,
+      "val_acc": 0.6909
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+label,real,subjects,train_real,val,test,train_aug
+hungry,567,255,423,72,72,467
+tired,678,484,467,106,105,467
+discomfort,155,81,133,11,11,467
+belly_pain,166,82,137,14,15,467
+burping,212,104,178,17,17,467

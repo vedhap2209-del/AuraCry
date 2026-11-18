@@ -1,0 +1,24 @@
+{
+  "classes": [
+    "hungry",
+    "tired",
+    "discomfort",
+    "belly_pain",
+    "burping"
+  ],
+  "split_seed": 42,
+  "n_real": 1778,
+  "n_augmented": 997,
+  "n_excluded": 901,
+  "near_duplicates": {
+    "pairs": 1458,
+    "clips_regrouped": 812,
+    "cross_source_pairs": 83,
+    "clusters_merged": 128
+  },
+  "sources": [
+    "donateacry",
+    "infantcry_dbl_t1",
+    "infantcry_dbl_t2"
+  ]
+}

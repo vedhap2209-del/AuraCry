@@ -1,0 +1,44 @@
+mode=train_csv_vs_test_csv  rows=21468  recordings=573
+Reason
+hu    3239
+ti    2612
+bp    2606
+sc    2605
+dc    2603
+ch    2602
+bu    2602
+lo    2599
+Random Forest                    acc 0.833 | bal-acc 0.179 | macro-F1 0.195  (24s)
+C:\Users\91799\AppData\Roaming\Python\Python311\site-packages\sklearn\ensemble\_weight_boosting.py:527: FutureWarning: The SAMME.R algorithm (the default) is deprecated and will be removed in 1.6. Use the SAMME algorithm to circumvent this warning.
+  warnings.warn(
+AdaBoost                         acc 0.652 | bal-acc 0.158 | macro-F1 0.128  (86s)
+Logistic Regression              acc 0.169 | bal-acc 0.186 | macro-F1 0.079  (1s)
+C:\Users\91799\AppData\Roaming\Python\Python311\site-packages\sklearn\ensemble\_weight_boosting.py:527: FutureWarning: The SAMME.R algorithm (the default) is deprecated and will be removed in 1.6. Use the SAMME algorithm to circumvent this warning.
+  warnings.warn(
+Stack RF>Ada>LR (balanced meta)  acc 0.828 | bal-acc 0.180 | macro-F1 0.188  (315s)
+C:\Users\91799\AppData\Roaming\Python\Python311\site-packages\sklearn\ensemble\_weight_boosting.py:527: FutureWarning: The SAMME.R algorithm (the default) is deprecated and will be removed in 1.6. Use the SAMME algorithm to circumvent this warning.
+  warnings.warn(
+Stack + SMOTE (prior-aware meta) acc 0.775 | bal-acc 0.180 | macro-F1 0.171  (351s)
+majority-class baseline accuracy: 0.860
+
+Selected for serving: Stack RF>Ada>LR (balanced meta)
+               precision    recall  f1-score   support
+
+       Hungry       0.87      0.95      0.91       650
+      Unclear       0.00      0.00      0.00         0
+        Tired       0.00      0.00      0.00        23
+   Belly Pain       0.00      0.00      0.00        17
+       Scared       0.00      0.00      0.00        16
+   Discomfort       0.00      0.00      0.00        14
+   Cold / Hot       0.56      0.38      0.45        13
+Needs Burping       0.00      0.00      0.00        13
+       Lonely       0.25      0.10      0.14        10
+
+     accuracy                           0.83       756
+    macro avg       0.19      0.16      0.17       756
+ weighted avg       0.76      0.83      0.79       756
+
+C:\Users\91799\AppData\Roaming\Python\Python311\site-packages\sklearn\ensemble\_weight_boosting.py:527: FutureWarning: The SAMME.R algorithm (the default) is deprecated and will be removed in 1.6. Use the SAMME algorithm to circumvent this warning.
+  warnings.warn(
+
+Saved model/stack.joblib and model/metrics.json in 1053.0s

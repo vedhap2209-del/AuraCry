@@ -1,0 +1,4 @@
+# Optional experimental two-source separator for overlapping cries.
+# Requires a CPU-capable PyTorch install; first use downloads pretrained model weights.
+-r requirements-deep.txt
+speechbrain>=1.0

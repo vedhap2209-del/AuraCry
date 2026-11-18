@@ -1,0 +1,20 @@
+{
+  "method": "weighted_average",
+  "dl_weight": 0.55,
+  "classes": [
+    "Hungry",
+    "Tired",
+    "Discomfort",
+    "Belly Pain",
+    "Needs Burping"
+  ],
+  "label_order": [
+    "hungry",
+    "tired",
+    "discomfort",
+    "belly_pain",
+    "burping"
+  ],
+  "val_macro_f1": 0.5786,
+  "tuned_on": "validation split (never the test set)"
+}

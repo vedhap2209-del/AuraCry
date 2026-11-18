@@ -1,0 +1,8 @@
+{
+  "_readme": "Optional. Add videos you have personally checked (e.g. from a paediatric hospital channel). Entries here are shown first. Format: {\"title\": \"...\", \"url\": \"https://www.youtube.com/watch?v=VIDEO_ID\"}. Keys must match cry types.",
+  "Hungry": [],
+  "Sleepy": [],
+  "Fussy": [],
+  "Burp": [],
+  "Distress": []
+}

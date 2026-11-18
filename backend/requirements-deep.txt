@@ -1,0 +1,6 @@
+# Deep-learning branch (CNN + BiGRU). Large download (torch). CPU is enough for analysing a recording.
+#   pip install -r backend/requirements-deep.txt
+# If pip cannot find a torch build for your Python version, use Python 3.10-3.12 or see https://pytorch.org/get-started/locally/
+torch>=2.1
+librosa>=0.10
+soundfile>=0.12

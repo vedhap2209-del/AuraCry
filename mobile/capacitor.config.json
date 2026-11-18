@@ -1,0 +1,11 @@
+{
+  "appId": "app.auracry.mobile",
+  "appName": "AuraCry",
+  "webDir": "www",
+  "server": {
+    "url": "https://REPLACE-WITH-YOUR-BACKEND-URL",
+    "cleartext": false,
+    "androidScheme": "https"
+  },
+  "android": { "allowMixedContent": false }
+}
