@@ -11,7 +11,9 @@ bcrypt>=4.0
 soundfile>=0.12
 gunicorn>=21.2
 reportlab>=4.0
+groq>=0.11.0
 # Optional deep model (CNN+BiGRU). Not installed on the free tier (needs ~2 GB RAM). To enable the DL branch + fusion
 # in a deployment, install these too and use an instance with more memory:
 #   torch>=2.1
 #   librosa>=0.10
+
