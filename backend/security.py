@@ -196,27 +196,36 @@ class OTPDeliveryError(RuntimeError):
     """Raised when SMTP is configured but the message could not be delivered."""
 
 
+
 def send_otp_email(to_email: str, code: str, purpose: str = "login"):
-    """Send the OTP by SMTP when configured. Never report a failed SMTP attempt as delivered."""
+    """Show OTP in the frontend when development mode is enabled."""
+
+    # Development mode takes priority over SMTP.
+    if DEV_ECHO:
+        print(f"[AuraCry][DEV OTP] {to_email} -> {code}", flush=True)
+        return "dev", code
+
     host = (os.environ.get("SMTP_HOST") or "").strip()
     user = (os.environ.get("SMTP_USER") or "").strip()
     password = os.environ.get("SMTP_PASS") or ""
     sender = (os.environ.get("SMTP_FROM") or user).strip()
 
     if not host:
-        print(f"[AuraCry][DEV OTP] {to_email} -> {code} (SMTP is not configured)", flush=True)
-        return "dev", (code if DEV_ECHO else None)
+        raise OTPDeliveryError("No email delivery provider is configured.")
 
     if not user or not password or not sender:
         raise OTPDeliveryError(
-            "SMTP is enabled but SMTP_USER, SMTP_PASS and SMTP_FROM must be configured. "
-            "For Gmail, use a Google App Password, not your normal account password."
+            "SMTP_USER, SMTP_PASS and SMTP_FROM must be configured."
         )
 
     subject = "Your AuraCry verification code"
     purpose_label = "login" if purpose == "login" else "password reset"
-    body = (f"Your AuraCry {purpose_label} verification code is: {code}\\n\\n"
-            f"It expires in {OTP_TTL // 60} minutes. If you did not request this, ignore this email.")
+    body = (
+        f"Your AuraCry {purpose_label} verification code is: {code}\n\n"
+        f"It expires in {OTP_TTL // 60} minutes. "
+        "If you did not request this, ignore this email."
+    )
+
     msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = sender
@@ -224,6 +233,7 @@ def send_otp_email(to_email: str, code: str, purpose: str = "login"):
     msg.set_content(body)
 
     port = int(os.environ.get("SMTP_PORT", "587"))
+
     try:
         with smtplib.SMTP(host, port, timeout=20) as smtp:
             smtp.ehlo()
@@ -234,7 +244,7 @@ def send_otp_email(to_email: str, code: str, purpose: str = "login"):
             smtp.send_message(msg)
     except Exception as exc:
         raise OTPDeliveryError(
-            f"Could not send the verification email ({exc.__class__.__name__}). "
-            "Check SMTP settings and the Gmail App Password."
+            f"Could not send verification email ({exc.__class__.__name__})."
         ) from exc
+
     return "email", None
