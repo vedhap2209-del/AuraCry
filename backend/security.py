@@ -182,6 +182,8 @@ def csrf_ok() -> bool:
     return bool(sent and good and hmac.compare_digest(sent, good))
 
 
+
+
 # ------------------------------------------------------------------ email delivery
 def mask_email(e: str) -> str:
     try:
@@ -193,56 +195,58 @@ def mask_email(e: str) -> str:
 
 
 class OTPDeliveryError(RuntimeError):
-    """Raised when SMTP is configured but the message could not be delivered."""
-
+    """Raised when an OTP email cannot be delivered."""
 
 
 def send_otp_email(to_email: str, code: str, purpose: str = "login"):
-    """Show OTP in the frontend when development mode is enabled."""
+    """Send OTP through Google Apps Script, with optional development mode."""
 
-    # Development mode takes priority over SMTP.
+    # Development mode takes priority.
     if DEV_ECHO:
         print(f"[AuraCry][DEV OTP] {to_email} -> {code}", flush=True)
         return "dev", code
 
-    host = (os.environ.get("SMTP_HOST") or "").strip()
-    user = (os.environ.get("SMTP_USER") or "").strip()
-    password = os.environ.get("SMTP_PASS") or ""
-    sender = (os.environ.get("SMTP_FROM") or user).strip()
+    import requests
 
-    if not host:
-        raise OTPDeliveryError("No email delivery provider is configured.")
+    mail_url = (os.environ.get("AURACRY_MAIL_URL") or "").strip()
+    api_secret = os.environ.get("AURACRY_API_SECRET") or ""
 
-    if not user or not password or not sender:
+    if not mail_url or not api_secret:
         raise OTPDeliveryError(
-            "SMTP_USER, SMTP_PASS and SMTP_FROM must be configured."
+            "Google Apps Script email service is not configured."
         )
 
-    subject = "Your AuraCry verification code"
     purpose_label = "login" if purpose == "login" else "password reset"
-    body = (
-        f"Your AuraCry {purpose_label} verification code is: {code}\n\n"
-        f"It expires in {OTP_TTL // 60} minutes. "
-        "If you did not request this, ignore this email."
-    )
 
-    msg = EmailMessage()
-    msg["Subject"] = subject
-    msg["From"] = sender
-    msg["To"] = to_email
-    msg.set_content(body)
-
-    port = int(os.environ.get("SMTP_PORT", "587"))
+    payload = {
+        "apiKey": api_secret,
+        "email": to_email,
+        "code": code,
+        "purpose": purpose_label,
+    }
 
     try:
-        with smtplib.SMTP(host, port, timeout=20) as smtp:
-            smtp.ehlo()
-            if os.environ.get("SMTP_STARTTLS", "1") == "1":
-                smtp.starttls()
-                smtp.ehlo()
-            smtp.login(user, password)
-            smtp.send_message(msg)
-    except Exception as exc:
+        response = requests.post(
+            mail_url,
+            json=payload,
+            timeout=30,
+            allow_redirects=True,
+        )
+        response.raise_for_status()
+
+        try:
+            result = response.json()
+        except ValueError as exc:
+            raise OTPDeliveryError(
+                "Email service returned an invalid response."
+            ) from exc
+
+        if not result.get("success"):
+            raise OTPDeliveryError(
+                "Google Apps Script could not send the OTP email."
+            )
+
+    except requests.RequestException as exc:
         raise OTPDeliveryError(
             f"Could not send verification email ({exc.__class__.__name__})."
         ) from exc
