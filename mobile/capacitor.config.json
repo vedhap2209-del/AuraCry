@@ -3,7 +3,7 @@
   "appName": "AuraCry",
   "webDir": "www",
   "server": {
-    "url": "https://REPLACE-WITH-YOUR-BACKEND-URL",
+    "url": "https://auracry-1j4z.onrender.com",
     "cleartext": false,
     "androidScheme": "https"
   },
