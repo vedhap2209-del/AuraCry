@@ -13,7 +13,7 @@ services:
       - key: COOKIE_SECURE
         value: "1"                  # Render serves HTTPS, so secure cookies
       - key: OTP_DEV_ECHO
-        value: "1"                  # no email provider -> the login code is shown on screen (clearly marked "dev mode").
+        value: "0"                  # no email provider -> the login code is shown on screen (clearly marked "dev mode").
                                     # Set to "0" and add SMTP_* vars to email real codes instead.
       - key: RATELIMIT_ENABLED
         value: "1"
